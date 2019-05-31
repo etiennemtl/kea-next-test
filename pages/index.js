@@ -24,7 +24,15 @@ const indexLogic = kea({
       counter => counter * 2,
       PropTypes.number
     ]
-  })
+  }),
+  takeLatest: ({ actions, workers }) => ({
+    [actions.increment]: workers.updateCounter
+  }),
+  workers: {
+    updateCounter: function * (action) {
+      console.log('counter update triggered')
+    }
+  }
 })
 
 function Index ({ counter, doubleCounter, actions: { increment, decrement }}) {

@@ -6,6 +6,7 @@ import App, { Container } from 'next/app'
 import Layout from '../components/MyLayout'
 
 import { getStore, activatePlugin, resetContext, getContext } from 'kea'
+import sagaPlugin from 'kea-saga'
 
 export const initStore = (initialState = {}) => {
   console.log("in initStore, got initialState", initialState)
@@ -13,7 +14,8 @@ export const initStore = (initialState = {}) => {
   resetContext({
     debug: true,
     attachStrategy: 'replace',
-    detachStrategy: 'lazy'
+    detachStrategy: 'lazy',
+    plugins: [sagaPlugin]
   })
 
   getStore({
